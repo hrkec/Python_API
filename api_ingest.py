@@ -21,7 +21,6 @@ def write_all_players_csv(now, response):
             last_pulls[row['id']] = row['pull_time']
 
         csv_file.close()
-
         csv_file = open(fr"players.csv", "a+", encoding="UTF8", newline='')
 
         for entry in response.json():
@@ -39,6 +38,7 @@ def write_all_players_csv(now, response):
                 writer.writerow(data)
 
         csv_file.close()
+
     except FileNotFoundError:
         csv_file = open(r"players.csv", "w+", encoding="UTF8", newline='')
         writer = csv.DictWriter(csv_file, fieldnames=header)
@@ -47,6 +47,7 @@ def write_all_players_csv(now, response):
             data = dict(entry)
             data['pull_time'] = f'{str(now)}'
             writer.writerow(data)
+
         csv_file.close()
 
 
